@@ -22,20 +22,15 @@ const Navbar = ({ title, icon }) => {
   const authLinks = (
     <Fragment>
       <li className="nav-link" style={{ color: "black", fontWeight: "600" }}>
-        Hello {user && user.name}
+        Hello {user.given_name}
       </li>
       <li>
-        <Link
-          onClick={() =>
-            logout({ logoutParams: { returnTo: window.location.origin } })
-          }
-          to="#!"
-          className="nav-link">
+        <Link to="/" className="nav-link">
           <i className="fas fa-sign-out-alt" />{" "}
           <span
             className="hide-sm"
             style={{ color: "black", fontWeight: "600" }}>
-            Logout
+            Home
           </span>
         </Link>
       </li>

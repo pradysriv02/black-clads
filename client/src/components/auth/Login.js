@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import GoogleLogin from "react-google-login";
 import AuthContext from "../../context/auth/authContext";
 import AlertContext from "../../context/alert/alertContext";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -76,21 +75,21 @@ const Login = (props) => {
       <h1 style={{ textAlign: "center" }}>
         Account <span className="text-primary">Login</span>
       </h1>
-      <button
-        type="submit"
-        className="btn btn-primary mt-3"
-        value="Register"
-        onClick={() => loginWithRedirect()}>
-        Login
-      </button>
-      <GoogleLogin
-        clientId=""
-        buttonText="Log In with Google"
-        onSuccess={onLoginSuccess}
-        onFailure={onLoginFailure}
-        cookiePolicy={"single_host_origin"}
-        className="mt-3"
-      />
+      <div
+        style={{
+          display: "flex",
+          width: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+        }}>
+        <button
+          type="submit"
+          className="btn btn-primary mt-3"
+          value="Register"
+          onClick={() => loginWithRedirect()}>
+          Login
+        </button>
+      </div>
     </div>
   );
 };

@@ -1,17 +1,29 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import logo from "../assets/logo.png";
+import Login from "../../auth/Login";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
+import { useAuth0 } from "@auth0/auth0-react";
 export default function Navbar() {
   const [navbarState, setNavbarState] = useState(false);
+  const { loginWithRedirect, logout } = useAuth0();
+  const { isAuthenticated } = useAuth0();
+  var buttonName;
+  if (isAuthenticated) buttonName = "LogOut";
+  else buttonName = "Login";
+  const buttonFunction = () => {
+    if (isAuthenticated) {
+      logout({ logoutParams: { returnTo: window.location.origin } });
+    } else loginWithRedirect();
+  };
   return (
     <>
       <Nav>
         <div className="brand">
           <div className="container">
             <img src={logo} alt="" />
-            Travelo 
+            Travelo
           </div>
           <div className="toggle">
             {navbarState ? (
@@ -36,7 +48,8 @@ export default function Navbar() {
             <a href="#testimonials">Testimonials</a>
           </li>
         </ul>
-        <button>Connect</button>
+
+        <button onClick={buttonFunction}>{buttonName}</button>
       </Nav>
       <ResponsiveNav state={navbarState}>
         <ul>
