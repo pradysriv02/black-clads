@@ -10,16 +10,15 @@ import NerExtract from "./components/dashboard/NerExtract";
 import AuthState from "./context/auth/AuthState";
 import AlertState from "./context/alert/AlertState";
 import Landing from "./components/landing/Landing";
-import IternarySlider from "./components/dashboard/IternarySlider"
+import IternarySlider from "./components/dashboard/IternarySlider";
 const App = () => {
   return (
-
     <AuthState>
       <AlertState>
         <Router>
           <Fragment>
             {/* <Navbar /> */}
-            <div className="container" >
+            <div className="container">
               <Alert />
               <Switch>
                 <Route exact path="/" component={Landing} />
@@ -30,7 +29,7 @@ const App = () => {
                   path="/merchant/register"
                   component={MerchantRegister}
                 />
-                <Route exact path="/itr" component={IternarySlider}/>
+                <Route exact path="/itr" component={IternarySlider} />
                 <PrivateRoute exact path="/dashboard" component={NerExtract} />
               </Switch>
             </div>

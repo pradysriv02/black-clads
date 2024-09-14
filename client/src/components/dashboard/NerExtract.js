@@ -91,8 +91,7 @@ function NerExtract() {
             display: entityDisplay ? "inline-block" : "none",
             marginTop: "40px",
             marginRight: "20px",
-          }}
-        >
+          }}>
           Get Coordinates
         </button>
 
@@ -103,8 +102,7 @@ function NerExtract() {
             marginTop: "10px",
             display: entityDisplay ? "inline-block" : "none",
             marginTop: "40px",
-          }}
-        >
+          }}>
           Load Local Business
         </button>
       </div>

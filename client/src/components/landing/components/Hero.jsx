@@ -6,8 +6,8 @@ import homeImage from "../assets/hero.png";
 export default function Hero() {
   const history1 = useHistory();
   const history2 = useHistory();
-  const navigateTo1 = () => history1.push('/dashboard');
-  const navigateTo2 = () => history2.push('/merchant/register');
+  const navigateTo1 = () => history1.push("/dashboard");
+  const navigateTo2 = () => history2.push("/merchant/register");
   return (
     <Section id="hero">
       <div className="background">
@@ -16,8 +16,11 @@ export default function Hero() {
       <div className="content">
         <div className="title">
           <h1>TRAVEL TO EXPLORE</h1>
-          <p style={{padding:"0 20vw", marginTop:"60px"}}>
-            A one stop platform for tourists and local businesses. Tourists with wanderlust can plan their way ahead without numbing their minds with countless blogs, meanwhile, a local business can get the best of his business by listing themselves on Travelo!
+          <p style={{ padding: "0 20vw", marginTop: "60px" }}>
+            A one stop platform for tourists and local businesses. Tourists with
+            wanderlust can plan their way ahead without numbing their minds with
+            countless blogs, meanwhile, a local business can get the best of his
+            business by listing themselves on Travelo!
           </p>
         </div>
         <div className="search">
@@ -33,8 +36,10 @@ export default function Hero() {
             <label htmlFor="">Check-out</label>
             <input type="date" />
           </div> */}
-          <button onClick={navigateTo1} style={{marginRight:"20px"}}>Explore Now</button>
-          <br/>
+          <button onClick={navigateTo1} style={{ marginRight: "20px" }}>
+            Explore Now
+          </button>
+          <br />
           <button onClick={navigateTo2}> Host your business </button>
         </div>
       </div>

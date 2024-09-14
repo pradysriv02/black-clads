@@ -2,12 +2,12 @@ import React, { useState, useContext, useEffect } from "react";
 import GoogleLogin from "react-google-login";
 import AuthContext from "../../context/auth/authContext";
 import AlertContext from "../../context/alert/alertContext";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Login = (props) => {
   const authContext = useContext(AuthContext);
   const alertContext = useContext(AlertContext);
-  const { login, error, clearErrors, isAuthenticated } = authContext;
-
+  const { login, error, clearErrors, isAuthenticated } = useAuth0();
   useEffect(() => {
     if (isAuthenticated) {
       props.history.push("/dashboard");
@@ -17,6 +17,7 @@ const Login = (props) => {
       alertContext.setAlert("Invalid Credententials", "danger");
       clearErrors();
     }
+    console.log(isAuthenticated);
     // eslint-disable-next-line
   }, [error, isAuthenticated, props.history]);
 
@@ -28,15 +29,12 @@ const Login = (props) => {
   const { email, password } = user;
 
   const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
-
+  const { loginWithRedirect } = useAuth0();
   const onSubmit = (e) => {
     e.preventDefault();
     if (email === "" || password === "") {
     } else {
-      login({
-        email,
-        password,
-      });
+      loginWithRedirect();
     }
   };
 
@@ -58,40 +56,33 @@ const Login = (props) => {
     marginTop: "50px",
   };
 
+  var axios = require("axios").default;
+  var options = {
+    method: "GET",
+    url: "https://your-auth0-tenant.com/api/v2/connections",
+    headers: { authorization: "Bearer {yourAccessToken}" },
+  };
+  axios
+    .request(options)
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+
   return (
     <div style={LoginForm}>
       <h1 style={{ textAlign: "center" }}>
         Account <span className="text-primary">Login</span>
       </h1>
-      <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email Address</label>
-          <input
-            class="form-control"
-            id="email"
-            type="email"
-            name="email"
-            value={email}
-            onChange={onChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            class="form-control"
-            id="password"
-            type="password"
-            name="password"
-            value={password}
-            onChange={onChange}
-            required
-          />
-        </div>
-        <button type="submit" className="btn btn-primary mt-3" value="Register">
-          Login
-        </button>
-      </form>
+      <button
+        type="submit"
+        className="btn btn-primary mt-3"
+        value="Register"
+        onClick={() => loginWithRedirect()}>
+        Login
+      </button>
       <GoogleLogin
         clientId=""
         buttonText="Log In with Google"

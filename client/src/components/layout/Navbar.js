@@ -2,28 +2,41 @@ import React, { Fragment, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = ({ title, icon }) => {
   const authContext = useContext(AuthContext);
 
-  const { isAuthenticated, logout, user, loadUser } = authContext;
+  const { isAuthenticated, logout, user } = useAuth0();
+  console.log(user);
 
-  useEffect(() => {
-    loadUser();
-    // eslint-disable-next-line
-  }, []);
+  // useEffect(() => {
+  //   loadUser();
+  //   // eslint-disable-next-line
+  // }, []);
 
-  const onLogout = () => {
-    logout();
-  };
+  // const onLogout = () => {
+  //   logout();
+  // };
 
   const authLinks = (
     <Fragment>
-      <li className="nav-link" style={{color:"black",fontWeight: "600"}}>Hello {user && user.name}</li>
+      <li className="nav-link" style={{ color: "black", fontWeight: "600" }}>
+        Hello {user && user.name}
+      </li>
       <li>
-        <Link onClick={onLogout} to="#!" className="nav-link">
+        <Link
+          onClick={() =>
+            logout({ logoutParams: { returnTo: window.location.origin } })
+          }
+          to="#!"
+          className="nav-link">
           <i className="fas fa-sign-out-alt" />{" "}
-          <span className="hide-sm" style={{color:"black",fontWeight: "600"}}>Logout</span>
+          <span
+            className="hide-sm"
+            style={{ color: "black", fontWeight: "600" }}>
+            Logout
+          </span>
         </Link>
       </li>
     </Fragment>
@@ -59,15 +72,13 @@ const Navbar = ({ title, icon }) => {
             data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
+            aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div
             className="collapse navbar-collapse justify-content-end"
             style={{ marginRight: "50px" }}
-            id="navbarSupportedContent"
-          >
+            id="navbarSupportedContent">
             <ul className="navbar-nav ">
               {isAuthenticated ? authLinks : guestLinks}
             </ul>

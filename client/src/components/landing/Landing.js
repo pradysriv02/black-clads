@@ -7,9 +7,11 @@ import ScrollToTop from "./components/ScrollToTop";
 import Services from "./components/Services";
 import Testimonials from "./components/Testimonials";
 import scrollreveal from "scrollreveal";
-import './landing.css';
+import { useAuth0 } from "@auth0/auth0-react";
+import "./landing.css";
 
 export default function Landing() {
+  const { logout } = useAuth0();
   useEffect(() => {
     const sr = scrollreveal({
       origin: "top",
@@ -41,6 +43,12 @@ export default function Landing() {
       <Recommend />
       <Testimonials />
       <Footer />
+      <button
+        onClick={() =>
+          logout({ logoutParams: { returnTo: window.location.origin } })
+        }>
+        Log Out
+      </button>
     </div>
   );
 }
