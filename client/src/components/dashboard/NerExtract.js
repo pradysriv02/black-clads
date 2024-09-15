@@ -11,6 +11,7 @@ import AuthContext from "../../context/auth/authContext";
 import DisplayEntities from "./DisplayEntities";
 import Map from "./Map";
 import Navbar from "../layout/Navbar";
+import MapsG from "./MapsG";
 
 function NerExtract() {
   const authContext = useContext(AuthContext);
@@ -23,48 +24,48 @@ function NerExtract() {
   const [entityDisplay, setEntityDisplay] = useState(false);
   const extractEntities = async (search) => {
     setCity(search.city);
-    setLoading(true);
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    try {
-      const res = await axios.post(
-        "http://127.0.0.1:8000/entities-recognition",
-        search,
-        config
-      );
-      setEntities(res.data.entities);
-      setEntityDisplay(true);
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
+    // setLoading(true);
+    // const config = {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // };
+    // try {
+    //   const res = await axios.post(
+    //     "http://127.0.0.1:8000/entities-recognition",
+    //     search,
+    //     config
+    //   );
+    //   setEntities(res.data.entities);
+    //   setEntityDisplay(true);
+    //   setLoading(false);
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
-  const getEntityDetails = async () => {
-    setMapLoading(true);
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    try {
-      const res = await axios.post(
-        "http://127.0.0.1:8000/geo-details",
-        entities,
-        config
-      );
-      setMapLoading(false);
-      setEntityDetails(res.data);
+  // const getEntityDetails = async () => {
+  //   setMapLoading(true);
+  //   const config = {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   };
+  //   try {
+  //     const res = await axios.post(
+  //       "http://127.0.0.1:8000/geo-details",
+  //       entities,
+  //       config
+  //     );
+  //     setMapLoading(false);
+  //     setEntityDetails(res.data);
 
-      console.log(entityDetails);
-      childRef.current.getAlert();
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  //     console.log(entityDetails);
+  //     childRef.current.getAlert();
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const loadLocalBusiness = async () => {
     childRef.current.getLocalBusinessDetails();
@@ -76,11 +77,11 @@ function NerExtract() {
     <>
       <Navbar />
       <Search extractEntities={extractEntities} setCity={setCity} />
-      <DisplayEntities
+      {/*<DisplayEntities
         entities={entities}
         setEntities={setEntities}
         entityDisplay={entityDisplay}
-        loading={loading}
+        loading={false}
       />
       <div className="flex">
         <button
@@ -105,14 +106,14 @@ function NerExtract() {
           }}>
           Load Local Business
         </button>
-      </div>
+      </div>*/}
 
-      <Map
-        ref={childRef}
-        entityDetails={entityDetails}
-        city={city}
-        entityDisplay={entityDisplay}
-        maploading={maploading}
+      <MapsG
+      // ref={childRef}
+      // entityDetails={entityDetails}
+      // city={city}
+      // entityDisplay={entityDisplay}
+      // maploading={false}
       />
     </>
   );
