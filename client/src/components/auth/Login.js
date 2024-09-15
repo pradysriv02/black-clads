@@ -17,10 +17,8 @@ const Login = (props) => {
       alertContext.setAlert("Invalid Credententials", "danger");
       clearErrors();
     }
-    console.log(isAuthenticated);
     // eslint-disable-next-line
   }, [error, isAuthenticated, props.history]);
-
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -76,21 +74,10 @@ const Login = (props) => {
       <h1 style={{ textAlign: "center" }}>
         Account <span className="text-primary">Login</span>
       </h1>
-      <button
-        type="submit"
-        className="btn btn-primary mt-3"
-        value="Register"
-        onClick={() => loginWithRedirect()}>
+      <button type="submit" className="btn btn-primary mt-3" value="Register" onClick={() => loginWithRedirect()}>
         Login
       </button>
-      <GoogleLogin
-        clientId=""
-        buttonText="Log In with Google"
-        onSuccess={onLoginSuccess}
-        onFailure={onLoginFailure}
-        cookiePolicy={"single_host_origin"}
-        className="mt-3"
-      />
+      <GoogleLogin clientId="" buttonText="Log In with Google" onSuccess={onLoginSuccess} onFailure={onLoginFailure} cookiePolicy={"single_host_origin"} className="mt-3" />
     </div>
   );
 };

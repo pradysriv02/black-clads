@@ -9,6 +9,7 @@ function DisplayEntities({ entities, setEntities, entityDisplay, loading }) {
       setEntities(entities.filter((e, i) => i != index));
     }
   };
+  loading = false;
   if (loading) return <Spinner />;
   return (
     <div
